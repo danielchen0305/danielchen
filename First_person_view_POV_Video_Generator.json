@@ -1,0 +1,360 @@
+{
+  "name": "My workflow 2",
+  "nodes": [
+    {
+      "parameters": {
+        "formTitle": "Video POV",
+        "formFields": {
+          "values": [
+            {
+              "fieldLabel": "Video title",
+              "requiredField": true
+            },
+            {
+              "fieldLabel": "Video size",
+              "fieldType": "dropdown",
+              "fieldOptions": {
+                "values": [
+                  {
+                    "option": "1280:768"
+                  },
+                  {
+                    "option": "768:1280"
+                  }
+                ]
+              }
+            },
+            {
+              "fieldLabel": "Duration (second)",
+              "fieldType": "dropdown",
+              "fieldOptions": {
+                "values": [
+                  {
+                    "option": "5"
+                  },
+                  {
+                    "option": "10"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.formTrigger",
+      "typeVersion": 2.2,
+      "position": [
+        700,
+        80
+      ],
+      "id": "586e4a42-31bf-4712-abe8-0d5e4f38d0a7",
+      "name": "On form submission",
+      "webhookId": "e6109aa3-9810-4841-80ec-46e9f57509bb"
+    },
+    {
+      "parameters": {
+        "modelId": {
+          "__rl": true,
+          "value": "gpt-4o",
+          "mode": "list",
+          "cachedResultName": "GPT-4O"
+        },
+        "messages": {
+          "values": [
+            {
+              "content": "=First-Person POV Image & Video Prompt Generator (Single Input Unified Output)\nTask:\nYou are an advanced AI specialized in converting a brief user-provided description into a vivid, cinematic first-person POV prompt. The unified prompt produced must be optimized to work seamlessly with text-to-image and text-to-video AI tools like Flux, MidJourney, Stable Diffusion, Runway Gen-3 Alpha, and Pika Labs.\nYour single, AI-ready paragraph must:\nStrictly maintain a first-person perspective for deep viewer immersion.\nOpen with a detailed, descriptive foreground image (hands/feet interaction), smoothly progressing into animated background details suitable for video generation.\nAlways depict visible limbs actively interacting with the environment.\nInclude detailed descriptions of textures, lighting conditions, sensory experiences, and environmental dynamics.\nFollow structured formatting for consistent AI interpretation.\nRemain under 950 characters.\nHere is the short user-provided description: {{ $json['Video title'] }}\n\nFirst-Person Perspective Only:\n\nThe viewer must experience events firsthand, capturing a GoPro-style immersive visual framing with depth and dynamic motion.\nVisible Limbs for Immersion:\n\nClearly show hands, feet, or both in foreground interacting naturally and realistically with the environment.\nWorld Interaction:\n\nDepict tangible physical interaction (holding objects, adjusting gear, moving naturally).\nEnvironment must feel alive and respond to the viewer’s presence and actions.\nSensory & Cinematic Details:\n\nCapture multiple senses clearly and vividly:\nSight: lighting, colors, scale, and spatial details.\nTouch: textures, temperature sensations (heat, cold).\nSound: ambient noise, echoes, weather sounds.\nSmell: atmospheric scents (smoke, dampness, freshness).\nInclude dynamic environmental conditions (weather, wind, motion) and strong emotional undertones (excitement, tension, awe).\nStructured Formatting:\n\nForeground (POV Interaction Image Focus):\nBegin clearly with:\n\"First-person view POV GoPro shot of [describe visible limbs and their specific actions]...\"\n\nBackground (Scene & Environment Video Focus):\nSeamlessly transition into:\n\"In the background, [describe immersive scenery, detailed lighting, and dynamic environmental effects]...\"\n\nExample Input:\n\"POV: You're a knight in battle\"\n\nAI-Generated Example Output:\n\"First-person view POV GoPro shot of my gauntleted hands gripping the hilt of a longsword, steel gleaming in the sun. Blood and mud splatter my armor as I brace for enemy charge, heartbeat pounding. In the background, banners whip violently, soldiers clash fiercely; arrows streak the sky. Smoke from burning carts swirls amid storm clouds, the scent of iron and sweat filling the chaotic battlefield.\"\n\nStructured Formatting:\n\nForeground (POV Interaction Image Focus):\nStart with \"First-person view POV GoPro shot of [describe hands/feet and their action]...\"\n\nBackground (Scene & Environment Video Focus):\nTransition into \"In the background, [describe scenery, lighting, animated environmental effects]...\"\n\nUser Input (Single Prompt Field Example):\nExample Input: \"POV: You're a knight in battle\"\n\nAI-Generated Output (Example for \"POV: You're a Knight in Battle\"):\nPOV: You're a Knight in Battle\nPrompt: First-person view POV GoPro shot of my gauntleted hands gripping the hilt of a longsword, steel gleaming in the sun. Blood and mud splatter my armor as I brace for enemy charge, heartbeat pounding. In the background, banners whip violently, soldiers clash fiercely; arrows streak the sky. Smoke from burning carts swirls amid storm clouds, the scent of iron and sweat filling the chaotic battlefield.\n\nAI-Generated Output (Example for \"POV: You Wake Up as Cleopatra in Ancient Egypt\"):\nPOV: You Wake Up as Cleopatra in Ancient Egypt\nPrompt: First-person view POV GoPro shot of my elegant hands delicately adjusting a bejeweled golden crown, cool metal pressing against my skin. Fine silks brush softly over my arms, sunlight glowing through airy curtains. In the background, attendants whisper gently, palm fronds sway lazily, the distant sounds of the Nile drifting in with scents of incense and fresh lotus.\n\nAI-Generated Output (Example for \"POV: You're a Viking at Sea\"):\nPOV: You're a Viking at Sea\nPrompt: First-person view POV GoPro shot of my calloused hands gripping the rough wooden oars tightly, sea spray cold and sharp against my skin. Muscles strain rhythmically with each stroke, seawater soaking through fur-lined sleeves. In the background, waves surge powerfully beneath the longship, sails billowing under stormy skies, distant lightning illuminating the wild ocean around us.\n\nAI-Generated Output (Example for \"POV: You're a Soldier in the Trenches of World War I\"):\nPOV: You're a Soldier in the Trenches of World War I\nPrompt: First-person view POV GoPro shot of my dirt-covered hands gripping a bolt-action rifle, knuckles whitened from tension. Cold rain drips down my helmet as distant artillery shakes the earth. In the background, soldiers huddle in muddy trenches under flashing flares; distant gunfire echoes ominously amid mist and barbed wire, the acrid scent of gunpowder heavy in the air.\n\nFINAL REMINDER:\nOutput MUST be less than 950 characters.\nOutput MUST be one JSON:"
+            }
+          ]
+        },
+        "jsonOutput": true,
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.openAi",
+      "typeVersion": 1.8,
+      "position": [
+        900,
+        80
+      ],
+      "id": "a2a4c7ea-627b-467b-9a74-f95a44aeebfb",
+      "name": "OpenAI",
+      "credentials": {
+        "openAiApi": {
+          "id": "BnQaguWh8N9TYkzJ",
+          "name": "OpenAi account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "binaryToPropery",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.extractFromFile",
+      "typeVersion": 1,
+      "position": [
+        1080,
+        320
+      ],
+      "id": "71697ec0-5da3-4f2e-8ac0-b45939456770",
+      "name": "Extract from File"
+    },
+    {
+      "parameters": {
+        "amount": 30
+      },
+      "type": "n8n-nodes-base.wait",
+      "typeVersion": 1.1,
+      "position": [
+        880,
+        540
+      ],
+      "id": "72fb51d5-7f5d-42aa-af17-913d6a26bf02",
+      "name": "Wait",
+      "webhookId": "95e1791a-f7b6-4a2d-af7f-984a422adfc6"
+    },
+    {
+      "parameters": {
+        "operation": "append",
+        "documentId": {
+          "__rl": true,
+          "value": "13M_Oit3kZ7BsbxcovQWDPlSLs5LYy_nagdlcAbmEhwU",
+          "mode": "list",
+          "cachedResultName": "AI Video List",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/13M_Oit3kZ7BsbxcovQWDPlSLs5LYy_nagdlcAbmEhwU/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Sheet1",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/13M_Oit3kZ7BsbxcovQWDPlSLs5LYy_nagdlcAbmEhwU/edit#gid=0"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Video link": "={{ $json.output[0] }}",
+            "Video title": "={{ $('On form submission').item.json['Video title'] }}"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "Video title",
+              "displayName": "Video title",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Video link",
+              "displayName": "Video link",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.5,
+      "position": [
+        700,
+        760
+      ],
+      "id": "6ca24366-5ae7-4607-899b-e4558b4f533c",
+      "name": "Google Sheets",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "VA1jURKDu5hHC8y0",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api-inference.huggingface.co/models/black-forest-labs/FLUX.1-dev",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpCustomAuth",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Accept"
+            }
+          ]
+        },
+        "sendBody": true,
+        "bodyParameters": {
+          "parameters": [
+            {
+              "name": "inputs",
+              "value": "={{ $json.message.content.prompt }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        700,
+        320
+      ],
+      "id": "670798b4-654b-4248-92d0-58343ef9e22a",
+      "name": "Create Image",
+      "credentials": {
+        "httpCustomAuth": {
+          "id": "5HMQ87trNre1awR5",
+          "name": "Custom Auth account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.dev.runwayml.com/v1/image_to_video",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpCustomAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"promptImage\": \"data:image/jpeg;base64,{{ $json.data }}\", \n  \"model\": \"gen3a_turbo\", \n  \"promptText\": \"{{ $('Create Image').item.json.message.content.Description }}\",\n  \"duration\": 10, \n  \"ratio\": \"{{ $('On form submission').item.json['Video size'] }}\", \n  \"watermark\": false\n}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        700,
+        540
+      ],
+      "id": "21bb3377-88dd-4372-9078-5d5da8734ec3",
+      "name": "Create Video",
+      "credentials": {
+        "httpCustomAuth": {
+          "id": "5HMQ87trNre1awR5",
+          "name": "Custom Auth account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "url": "=https://api.dev.runwayml.com/v1/tasks/{{$json.id}}",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpCustomAuth",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1040,
+        540
+      ],
+      "id": "ee72b0a7-cc1b-41c5-b228-d0922de69253",
+      "name": "Download Video",
+      "credentials": {
+        "httpCustomAuth": {
+          "id": "5HMQ87trNre1awR5",
+          "name": "Custom Auth account"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "On form submission": {
+      "main": [
+        [
+          {
+            "node": "OpenAI",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI": {
+      "main": [
+        [
+          {
+            "node": "Create Image",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Extract from File": {
+      "main": [
+        [
+          {
+            "node": "Create Video",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Wait": {
+      "main": [
+        [
+          {
+            "node": "Download Video",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Create Image": {
+      "main": [
+        [
+          {
+            "node": "Extract from File",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Create Video": {
+      "main": [
+        [
+          {
+            "node": "Wait",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Download Video": {
+      "main": [
+        [
+          {
+            "node": "Google Sheets",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "547680bd-5498-4f91-9b2a-89402bd62a58",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "558d88703fb65b2d0e44613bc35916258b0f0bf983c5d4730c00c424b77ca36a"
+  },
+  "id": "K5750UZDAhK5Aix6",
+  "tags": []
+}
